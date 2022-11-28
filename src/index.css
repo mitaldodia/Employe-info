@@ -15,7 +15,7 @@ body {
 
 .modal.show .modal-dialog {
     transform: none;
-    max-width: 1020px;
+    max-width: 1020px !important;
 }
 
 @media (max-width: 500px) {
@@ -87,7 +87,7 @@ form button {
 	margin-bottom: 20px;
 }
 
-.delete-btn {
+.all-btn {
 	background-color: red;
     color: #fff;
     padding: 6px 24px;
@@ -95,16 +95,29 @@ form button {
     display: inline-block;
     cursor: pointer;
     text-align: center;
+	margin: 0 6px;
+}
+.all-btn.edit-btn{
+	background-color: green;
+
+}
+.all-btn.view-btn{
+	background-color: blue;
+
 }
 .add-post-container {
     margin: 10px;
 }
 
 .add-new-emp button, .add-new-emp button:hover {
-	background-color: green;
+	background-color: #008000;
     border: 0;
     border-radius: 0;
+	color: #000;
 
+}
+.view-modal.modal.show .modal-dialog{
+	max-width: 630px !important;
 }
 .add-new-emp button img{
 width: 30px;

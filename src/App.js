@@ -37,11 +37,11 @@ const App = () => {
   };
 
   // DELETE with Axios
-  const deletePost = async (id) => {
+  const deletePost = async (item) => {
     if (window.confirm("Do you want to remove Employee detail ?")) {
       try {
-        await client.delete(`${id}`);
-        const foundIndex = posts.findIndex((item) => item.id == empModal.id);
+        await client.delete(`${item.id}`);
+        const foundIndex = posts.findIndex((item) => item.id !== empModal.id);
         posts.splice(foundIndex, 1);
         setPosts([...posts]);
 		console.log(posts);
@@ -188,32 +188,31 @@ const App = () => {
           {/* modal end here  */}
 
           {/* view detail modal start here  */}
-          <Modal show={viewDataModel} onHide={handleViewClose}>
+          <Modal show={viewDataModel} onHide={handleViewClose} className="view-modal">
             <Modal.Header closeButton>
               <Modal.Title>Show Employee Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <div className="add-post-container">
+              <div className="add-post-container view-modal-details">
                 <form className="row form-group">
-                  <div className="col-6 my-3">
-                    <label>First Name</label>
-
-                    <p>{empModal.name}</p>
+                  <div className="col-12 d-flex">
+                    <span className="me-2">First Name :</span>
+                    <p> {empModal.name}</p>
                   </div>
-                  <div className="col-6 my-3">
-                    <label>Enter Last Name</label>
+                  <div className="col-12">
+                    <span className="me-2"> Last Name : </span>
                     <p>{empModal.username}</p>
                   </div>
-                  <div className="col-6 my-3">
-                    <label>Enter Email Id</label>
+                  <div className="col-12">
+                    <span className="me-2"> Email Id</span>
                     <p>{empModal.email}</p>
                   </div>
-                  <div className="col-6 my-3">
-                    <label>Enter Phone Number</label>
+                  <div className="col-12">
+                    <span className="me-2"> Phone Number</span>
                     <p>{empModal.phone}</p>
                   </div>
-                  <div className="col-12 my-3">
-                    <label>Enter website</label>
+                  <div className="col-12">
+                    <span className="me-2"> website</span>
                     <p>{empModal.website}</p>
                   </div>
                   {/* <button type="submit" onClick={handleClose}>Submite</button> */}
@@ -225,13 +224,13 @@ const App = () => {
 
           <div className="posts-container">
             <div className="add-new-emp">
-              <Button variant="primary" onClick={handleShow}>
+              <Button variant="primary" className="edit-emp-btn" onClick={handleShow}>
                 <img src="./add.png" className="add-btn" alt="" /> Add new
                 Employee
               </Button>
             </div>
             <div className="employe-header">
-              <Table striped bordered hover>
+              <Table  bordered hover responsive>
                 <thead>
                   <tr>
                     <th>id</th>
@@ -257,20 +256,20 @@ const App = () => {
                         <td>
                           <div className="all-button">
                             <div
-                              className="delete-btn me-2"
+                              className="all-btn view-btn me-2"
                               onClick={() => viewData(post)}
                             >
-                              View Details
+                              View 
                             </div>
                             <div
-                              className="delete-btn"
+                              className="all-btn edit-btn"
                               onClick={() => onEditData(post)}
                             >
                               Edit
                             </div>
                             <div
-                              className="delete-btn"
-                              onClick={() => deletePost(post.id)}
+                              className="all-btn"
+                              onClick={() => deletePost(post)}
                             >
                               Delete
                             </div>
