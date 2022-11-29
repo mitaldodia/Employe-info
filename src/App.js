@@ -18,7 +18,7 @@ const initObj = {
 };
 
 const App = () => {
-  const [id, setID] = useState("");
+  // const [id, setID] = useState("");
   const [posts, setPosts] = useState([]);
   const [empModal, setEmpModal] = useState(initObj);
 
@@ -44,12 +44,45 @@ const App = () => {
         const foundIndex = posts.findIndex((item) => item.id !== empModal.id);
         posts.splice(foundIndex, 1);
         setPosts([...posts]);
-		console.log(posts);
-      } catch (error) {
+		    console.log(posts);
+      } 
+      catch (error) {
         console.log(error);
       }
     }
   };
+// create new for delete 
+
+// const deletePost = async (post) => {
+//   if (window.confirm("Do you want to remove Employee detail ?")) {
+//     try {
+//       // await client.delete(`${post.id}`);
+//       const newContacts = [...posts]; 
+//       const index = post.findIndex((post) => post.id === post);
+//       newContacts.splice(index, 1);
+//       setPosts(newContacts);
+
+
+//       // const foundIndex = posts.findIndex((post) => post.id !== empModal.id);
+//       // posts.splice(foundIndex, 1);
+//       // setPosts([...posts]);
+//       // console.log(posts);
+//     } 
+//     catch (error) {
+//       console.log(error);
+//     }
+//   }
+// };
+
+  // another delete function 
+
+  // const removeData = (id) => {
+  //   axios.delete(`${url}/${id}`).then(() => {
+  //     const del = data.filter((item) => id !== item.id)
+  //     setData(del)
+  //   })
+  // }
+
 
   // handle form submission
   const handleSubmit = (e) => {
@@ -66,7 +99,7 @@ const App = () => {
 		posts.push({ ...empModal, id: posts.length + 1 })
       } else {
         // let response = await client.put(empModal);
-        const foundIndex = posts.findIndex((item) => item.id == empModal.id);
+        const foundIndex = posts.findIndex((item) => item.id === empModal.id);
 		posts.splice(foundIndex, 1, empModal)
 	}
 		console.log(posts);
@@ -199,20 +232,20 @@ const App = () => {
                     <span className="me-2">First Name :</span>
                     <p> {empModal.name}</p>
                   </div>
-                  <div className="col-12">
+                  <div className="col-12 d-flex">
                     <span className="me-2"> Last Name : </span>
                     <p>{empModal.username}</p>
                   </div>
-                  <div className="col-12">
-                    <span className="me-2"> Email Id</span>
+                  <div className="col-12 d-flex">
+                    <span className="me-2"> Email Id :</span>
                     <p>{empModal.email}</p>
                   </div>
-                  <div className="col-12">
-                    <span className="me-2"> Phone Number</span>
+                  <div className="col-12 d-flex">
+                    <span className="me-2"> Phone Number :</span>
                     <p>{empModal.phone}</p>
                   </div>
-                  <div className="col-12">
-                    <span className="me-2"> website</span>
+                  <div className="col-12 d-flex">
+                    <span className="me-2"> website :</span>
                     <p>{empModal.website}</p>
                   </div>
                   {/* <button type="submit" onClick={handleClose}>Submite</button> */}
