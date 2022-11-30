@@ -41,48 +41,16 @@ const App = () => {
     if (window.confirm("Do you want to remove Employee detail ?")) {
       try {
         await client.delete(`${item.id}`);
-        const foundIndex = posts.findIndex((item) => item.id !== empModal.id);
+        const foundIndex = posts.findIndex((post) => post.id === item.id);
         posts.splice(foundIndex, 1);
         setPosts([...posts]);
-		    console.log(posts);
-      } 
-      catch (error) {
+        console.log(posts);
+      } catch (error) {
         console.log(error);
       }
     }
   };
-// create new for delete 
-
-// const deletePost = async (post) => {
-//   if (window.confirm("Do you want to remove Employee detail ?")) {
-//     try {
-//       // await client.delete(`${post.id}`);
-//       const newContacts = [...posts]; 
-//       const index = post.findIndex((post) => post.id === post);
-//       newContacts.splice(index, 1);
-//       setPosts(newContacts);
-
-
-//       // const foundIndex = posts.findIndex((post) => post.id !== empModal.id);
-//       // posts.splice(foundIndex, 1);
-//       // setPosts([...posts]);
-//       // console.log(posts);
-//     } 
-//     catch (error) {
-//       console.log(error);
-//     }
-//   }
-// };
-
-  // another delete function 
-
-  // const removeData = (id) => {
-  //   axios.delete(`${url}/${id}`).then(() => {
-  //     const del = data.filter((item) => id !== item.id)
-  //     setData(del)
-  //   })
-  // }
-
+  // create new for delete
 
   // handle form submission
   const handleSubmit = (e) => {
@@ -96,19 +64,19 @@ const App = () => {
       console.log(empModal);
       if (mode === "add") {
         // let response = await client.post(empModal);
-		posts.push({ ...empModal, id: posts.length + 1 })
+        posts.push({ ...empModal, id: posts.length + 200 + 1 });
       } else {
         // let response = await client.put(empModal);
         const foundIndex = posts.findIndex((item) => item.id === empModal.id);
-		posts.splice(foundIndex, 1, empModal)
-	}
-		console.log(posts);
-		setPosts([...posts]);
+        posts.splice(foundIndex, 1, empModal);
+      }
+      console.log(posts);
+      setPosts([...posts]);
       setEmpModal(initObj);
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
 
   // modal state
   const [show, setShow] = useState(false);
@@ -119,9 +87,9 @@ const App = () => {
     setShow(false);
   };
   const handleShow = () => {
-	setEmpModal(initObj);
-	setShow(true);
-  }
+    setEmpModal(initObj);
+    setShow(true);
+  };
   const handleViewClose = () => {
     setViewDataModel(false);
   };
@@ -208,10 +176,13 @@ const App = () => {
                       onChange={onValueChange}
                     />
                   </div>
-                  <button type="submit" onClick={() => {
-					handleClose();
-					onSave();
-				  }}>
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      handleClose();
+                      onSave();
+                    }}
+                  >
                     Submite
                   </button>
                 </form>
@@ -221,7 +192,11 @@ const App = () => {
           {/* modal end here  */}
 
           {/* view detail modal start here  */}
-          <Modal show={viewDataModel} onHide={handleViewClose} className="view-modal">
+          <Modal
+            show={viewDataModel}
+            onHide={handleViewClose}
+            className="view-modal"
+          >
             <Modal.Header closeButton>
               <Modal.Title>Show Employee Details</Modal.Title>
             </Modal.Header>
@@ -257,13 +232,17 @@ const App = () => {
 
           <div className="posts-container">
             <div className="add-new-emp">
-              <Button variant="primary" className="edit-emp-btn" onClick={handleShow}>
+              <Button
+                variant="primary"
+                className="edit-emp-btn"
+                onClick={handleShow}
+              >
                 <img src="./add.png" className="add-btn" alt="" /> Add new
                 Employee
               </Button>
             </div>
             <div className="employe-header">
-              <Table  bordered hover responsive>
+              <Table bordered hover responsive>
                 <thead>
                   <tr>
                     <th>id</th>
@@ -276,11 +255,11 @@ const App = () => {
                   </tr>
                 </thead>
 
-                {posts.map((post) => {
+                {posts.map((post, index) => {
                   return (
                     <tbody key={post.id}>
                       <tr>
-                        <td>{post.id}</td>
+                        <td>{index + 1}</td>
                         <td>{post.name}</td>
                         <td>{post.username}</td>
                         <td>{post.email}</td>
@@ -292,7 +271,7 @@ const App = () => {
                               className="all-btn view-btn me-2"
                               onClick={() => viewData(post)}
                             >
-                              View 
+                              View
                             </div>
                             <div
                               className="all-btn edit-btn"
